@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login/Registration</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+	<!-- To:Me, Fix CSS styling into CSS when have time, same for JS. -->
+	<style>
+		label{
+			display:block;
+		}
+		#loginForm{
+			display:inline;
+		}
+
+		#bodyLogin{
+			margin:20 50px;
+		}
+		input[type="text"]{
+			width:10em;
+		}
+		#registrationForm{
+			display:inline;
+		}
+		#loginBox{
+			display:inline;
+		}
+		#registerBox{
+			display:inline;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="wrapper" class = "container">
+		<h4>Welcome!</h4>
+		<div id = "loginBox">
+			<form id = "loginForm" action="/login" method="post">
+			{% csrf_token %}
+			<h3>Login</h3>
+			<div id = "bodyLogin">
+				<div id = "email">
+					<label>Username:</label>
+					<input class = "textBox" type = "text" name = "username">
+				</div>
+				<div id = "password">
+					<label>Password:</label>
+					<input class = "sizeBox" type = "text" name = "password">
+				</div>
+			</div>
+
+			<input id = "sendLogin" class = "btn-primary" type = "submit" value = "Login">
+			</form>
+		</div>
+
+
+		<div id = "registerBox">
+			<form id = "registrationForm" action="/register" method="post">
+			{% csrf_token %}
+			<h3>Registration</h3>
+			<div id = "first_name">
+				<label>Name:</label>
+				<input type = "text" name = "name">
+			</div>
+			<div id = "last_name">
+				<label>Username:</label>
+				<input type = "text" name = "username">
+			</div>
+			<div id = "password">
+				<label>Password:</label>
+				<input type = "text" name = "password" placeholder="********">
+			</div>
+			<div id = "c_password">
+				<label>Confirm Password:</label>
+				<input type = "text" name = "c_password" placeholder="Min 8 characters">
+			</div>
+			<input id = "sendRegister" class = "btn-primary" type = "submit" value = "Register">
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

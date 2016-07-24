@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<!-- Fix CSS styling into CSS static folder in the future, same for JS. -->
+	<style>
+		label{
+			display:block;
+		}
+
+		input[type="text"]{
+			width:10em;
+		}
+     	#errorUser{
+        color:red;
+        font-weight:bold;
+        display:none;
+      	}
+	</style>
+
+	<script>
+    $(document).ready(function() {
+        $('#addTravel').submit(function(){
+          return false;
+        });
+        $('#addTravel').click(function() {
+          var textInput = $('#destination').val();
+          var currentDate = $( "#datepicker0" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
+          var futureDate = $( "#datepicker1" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
+          var dateValidation = true;
+          if(currentDate > futureDate){
+          	alert("Are you sure the date is correct?");
+          	dateValidation = false;
+          }
+          if((textInput !== null) && (currentDate !== null) && (futureDate !== null) && dateValidation){
+            alert("Thanks!");
+            $('#errorUser').css("display", "none");
+            $('#tripForm').submit();
+          } else {
+            $('#errorUser').css("display", "unset");
+          }
+        });
+      });
+    $(function() {
+        $( "#datepicker0" ).datepicker();
+        $( "#datepicker1" ).datepicker();
+    });
+    $(document).on(function(){
+      if((textInput !== null) && (currentDate !== null) && (futureDate !== null)){
+        $('#errorUser').css("display", hide());
+      }
+    });
+    </script>
+</head>
+<body>
+	<div id="wrapper" class = "container">
+		<a href="/travels">Home</a> | <a href="/logout">Logout</a>
+		<div id = "tripBox">
+			<form id = "tripForm" action = "process_trip_request" method="post">
+			{% csrf_token %}
+			<h4>Add a trip</h4>
+			<div id = "travel">
+				<div>
+					<label>Destination</label>
+					<input type = "text" id = "destination" name = "destination">
+				</div>
+				<div id = "description">
+					<label>Description</label>
+					<input type = "text" name = "description">
+				</div>
+				<div id = "travel_date_from">
+					<label>Travel Date From</label>
+					<input type = "text" id="datepicker0" name = "travel_date_from">
+				</div>
+				<div id = "travel_date_to">
+					<label>Travel Date To</label>
+					<input type = "text" id="datepicker1" name = "travel_date_to">
+				</div>
+			</div>
+
+			<input id = "addTravel" class = "btn-primary" type = "submit" value = "Add">
+			</form>
+			<div>
+        		<p id = errorUser>You must fill everything out!</p>
+      		</div>
+		</div>
+
+	</div>
+</body>
+
+</html>

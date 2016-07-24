@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Travel Dashboard</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+	<!-- Fix CSS styling into CSS static folder in the future, same for JS. -->
+	<style>
+		label{
+			display:block;
+		}
+		input[type="text"]{
+			width:10em;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="wrapper" class = "container">
+		<div id = "header">
+			<a href="/logout">Logout</a>
+		</div>
+		
+		<h4>Hello, {{request.session.name}}!</h4>
+		<p>Your Trip Schedules</p>
+		<table>
+   			<tr>
+        		<th>Destination</th>
+        		<th>Travel Start Date</th>
+        		<th>Travel End Date</th>
+        		<th>Plan</th>
+    		</tr>
+    		{% for item in my_plan %}
+    		<tr>
+	        	<th><a href = "travels/destination/{{item.id}}">{{item.destination}}</a></th>
+	        	<th>{{item.travel_start_date}}</th>
+	        	<th>{{item.travel_end_date}}</th>
+	        	<th>{{item.plan}}</th>
+        	</tr>
+    		{% endfor %}
+    	</table>
+    	<p>Other User's Travel Plans</p>
+		<table>
+   			<tr>
+   				<th>Name</th>
+        		<th>Destination</th>
+        		<th>Travel Start Date</th>
+        		<th>Travel End Date</th>
+        		<th>Do You Want to Join?</th>
+    		</tr>
+    		{% for item in all_users %}
+    		<tr>
+    			<th>{{item.user.name}}</th>
+	        	<th><a href = "travels/destination/{{item.id}}">{{item.destination}}</th>
+	        	<th>{{item.travel_start_date}}</th>
+	        	<th>{{item.travel_end_date}}</th>
+	        	<th><a href = "join/{{item.id}}">Join</a></th>
+        	</tr>
+    		{% endfor %}
+    	</table>
+    	<a href = "travels/add">Add Travel Plan</a>
+	</div>
+</body>
+
+</html>

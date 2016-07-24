@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Destination</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+	<!-- Fix CSS styling into CSS static folder in the future, same for JS. -->
+	<style>
+		label{
+			display:block;
+		}
+		input[type="text"]{
+			width:10em;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="wrapper" class = "container">
+		<div id = "header">
+			<a href="/">Home</a> | <a href="/logout">Logout</a>
+		</div>
+
+		<div id = "content">
+			<p>{{destination_result.destination}}</p>
+			<p>Planned By: {{destination_result.user.name}}</p>
+			<p>Description: {{destination_result.plan}}</p>
+			<p>Travel Date From: {{destination_result.travel_start_date}}</p>
+			<p>Travel Date To: {{destination_result.travel_end_date}}</p>
+		</div>
+		
+		<div id = "otherUsers">
+			<p>Other user's joining the trip:</p>
+			{% for item in others %}
+    		<tr>
+    			<th>{{item.name}}</th>
+        	</tr>
+    		{% endfor %}
+		</div>
+	</div>
+</body>
+
+</html>
